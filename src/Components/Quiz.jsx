@@ -6,7 +6,7 @@ import QuizItem from "./QuizItem";
 const Quiz = () => {
   const [error, setError] = useState(null);
   const [Questions, setQuestion] = useState([]);
-  //const [result, setresult] = useState([]);
+  const [result, setresult] = useState(false);
   //fetch quiz
 
   useEffect(() => {
@@ -25,15 +25,17 @@ const Quiz = () => {
 
   // handle answer
   const handleSelection = (questionid, selectedId) => {
+    setresult(true);
     console.log(questionid, selectedId);
-    // setresult((prev)=>[...prev.filter(item)=> item.id !== questionid],)
+    setresult(selectedId);
   };
   //console.log(Questions);
-  Questions.forEach((item) => console.log(item.options[0]));
+
   return (
     <div>
       This is Quiz page{error && <h1>{error}</h1>}
       <div className="question_container">
+        <h1>Take th Quiz</h1>
         {Questions.map((ques) => (
           <div key={ques.id}>
             <QuizItem
@@ -45,6 +47,7 @@ const Quiz = () => {
                 handleSelection(ques.id, selectedOption)
               }
             />
+            {result === ques.answer && <h1>Correct{ques.answer}</h1>}
           </div>
         ))}
       </div>

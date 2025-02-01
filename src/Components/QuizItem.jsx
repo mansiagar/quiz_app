@@ -4,7 +4,6 @@ import "react";
 const QuizItem = ({ id, question, options, onAnswerSelected }) => {
   return (
     <div>
-      <h1>Take th Quiz</h1>
       <h1>
         Q.no:{id} {question}
       </h1>
