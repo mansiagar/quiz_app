@@ -16,7 +16,7 @@ const AuthContext = ({ children }) => {
     setToken(authToken);
     setAuthenticate(true);
     localStorage.setItem("token", authToken);
-    navigate("/");
+    navigate("/quiz");
   };
   const logout = () => {
     setToken(null);

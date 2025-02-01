@@ -2,11 +2,14 @@ import "react";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { Auth } from "../Create";
+import { useNavigate } from "react-router-dom";
 import "../style/Home.css";
 const Home = () => {
   // login form display state
   const [loginForm, setLoginForm] = useState(false);
   const [content, setContent] = useState(true);
+  const [formdata, setFormdata] = useState({ username: "", password: "" });
+
   //error
   const [error, setError] = useState(null);
   const { login } = useContext(Auth);
@@ -14,8 +17,8 @@ const Home = () => {
     setLoginForm(true);
     setContent(false);
   };
-
-  const [formdata, setFormdata] = useState({ username: "", password: "" });
+  // navigate
+  const navigate = useNavigate();
 
   // handleChange
   const handleChange = (e) => {
@@ -33,8 +36,10 @@ const Home = () => {
         formdata
       );
       const token = response.data.token;
-
       login(token);
+      if (!token) {
+        navigate("/quiz");
+      }
     } catch (error) {
       setError("Invalid crediential", error);
     }
